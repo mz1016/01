@@ -1,0 +1,58 @@
+关系型数据库：mysql  orancle=》DBA
+关系：库=》表=》对象
+
+
+
+非关系型数据库：MongoDB  SQLserver sqllite
+关系:库和集合  库=》集合（文档document）》对象
+
+创建用户  基于管理员权限  
+db.createUser({
+    user:"admin",
+    pwd:"123",
+    roles:[{role:"readAnyDatabase",db:"test1"}]//权限
+})
+默认管理员root（超级管理员）
+show dbs查看当前所有数据库
+use 数据库名称 使用数据库  创建数据库
+db查看当前使用数据库
+db.dropDatabase()删除数据库（当前使用）
+
+db.createCollection(name, options) 创建集合
+    name: 要创建的集合名称
+    options: 可选参数, 指定有关内存大小及索引的选项
+        options 可以是如下参数：
+        字段	        类型	描述
+        capped	        布尔	（可选）如果为 true，则创建固定集合。固定集合是指有着固定大小的集合，当达到最大值时，它会自动覆盖最早的文档。
+                                当该值为 true 时，必须指定 size 参数。
+        autoIndexId	    布尔	（可选）如为 true，自动在 _id 字段创建索引。默认为 false。
+        size	        数值	（可选）为固定集合指定一个最大值（以字节计）。
+                                    如果 capped 为 true，也需要指定该字段。
+        max	            数值	（可选）指定固定集合中包含文档的最大数量。
+
+db.collection.drop()删除集合
+show collections查看选中数据库下面的集合
+ 
+
+增  db.集合名.insert.({})插入数据   
+    db.集合名.insert.([{},{}])插入多条数据   
+    db.集合名.insertMany([{},{}])插入多条数据（3.4以上版本）
+    db.集合名.insertOne({})插入一条数据（3.4以上版本）
+    db.集合名.save.({})保存文档 
+
+删  db.集合名.remove({})小括号内不能为空   大括号为空是删除所有
+    db.集合名.deleteOne({})删除单个数据
+    db.集合名.deleteMany({})删除匹配的所有
+
+改  db.集合名.update({},{$set： {}})
+    db.集合名.updateOne()更新一条
+    db.集合名.updateMany()更新所有匹配到的所有
+    db.集合名.
+
+查  db.集合名.find（）查找所有  db.集合名.find（{具体对象}）查找对应数据 
+    limit  截取：
+    截取  db.集合名.find().limit(num)数量
+    skip跳过：跳过当前，查找之后所有
+    db.集合名.find().skip(num)
+    sort排序
+    db.集合名.count()查找数据总量   数量
